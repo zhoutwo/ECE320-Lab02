@@ -166,6 +166,10 @@ void update_array(double arr[], int N) {
 //
 
 void filter(double A[], double B[], double fin[], double fout[], int N) {
+    int i;
+    for (i = 0; i < N; i++) {
+        fout[0] += B[i] * fin[i] - A[i] * fout[i];
+    }
 }
 
 /*****************************************************************/
