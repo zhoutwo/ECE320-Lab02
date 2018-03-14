@@ -501,8 +501,13 @@ int main(void) {
             arg = ((double) (r2 - r1))*720.0 + (double) (p2 - p1);
 
         speed = arg*speed_scale;
-
-        Y = speed;
+        update_array(Yout, Nr);
+        update_array(Yin, Nr);
+        Yin[0] = AD_value;
+        filter(A, B, Yin, Yout, Nr);
+        Yout[0] = max(0.0, Yout[0]);
+        Yout[0] = min(Yout[0], 1023);
+        Y = Yout[0];
 
         /*********************************************/
         //  implement the ERROR computation
