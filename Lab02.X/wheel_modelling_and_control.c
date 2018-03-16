@@ -372,7 +372,8 @@ int main(void) {
     double A[5] = {1.0, -2.3695, 2.3140, -1.0547, 0.1874}, B[5] = {0.0048, 0.0193, 0.0289, 0.0193, 0.0048};
     int Nr = 5, Ny = 5;
     double AD_scale = 0.1688;
-    double kp = 5.0;
+    double kp = 8.0;
+    double reference_scaling = 1.087;
 
     // set up the external interrupt
 
@@ -486,6 +487,7 @@ int main(void) {
         else if ((time >= 0.5) & (time < 5.5)) R = 10.0;
         else if ((time >= 5.5) & (time < 10.5)) R = 25.0;
         else if (time >= 10.5) R = 40.0;
+        R = R *  reference_scaling;
 
         /*********************************************/
         //  implement the FEEDBACK (H) functions
@@ -568,7 +570,7 @@ int main(void) {
 
         if (--count == 0) {
             int_time = (int) (100.0 * time); // convert for printout
-            int_R = (int) 100*R;
+            int_R = (int) 100*R/reference_scaling;
             int_Y = (int) 100*Y;
 
             printf("%8d %8d %8d\n", int_time, int_R, int_Y);
