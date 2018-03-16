@@ -482,11 +482,11 @@ int main(void) {
         filter(A, B, Rin, Rout, Nr);
         Rout[0] = max(0.0, Rout[0]);
         Rout[0] = min(Rout[0], 1023);
-//        R = Rout[0] * AD_scale;
-        if (time < 0.5) R = 0.0;
-        else if ((time >= 0.5) & (time < 5.5)) R = 10.0;
-        else if ((time >= 5.5) & (time < 10.5)) R = 25.0;
-        else if (time >= 10.5) R = 40.0;
+        R = Rout[0] * AD_scale;
+//        if (time < 0.5) R = 0.0;
+//        else if ((time >= 0.5) & (time < 5.5)) R = 10.0;
+//        else if ((time >= 5.5) & (time < 10.5)) R = 25.0;
+//        else if (time >= 10.5) R = 40.0;
         R = R *  reference_scaling;
 
         /*********************************************/
