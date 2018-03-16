@@ -372,6 +372,7 @@ int main(void) {
     double A[5] = {1.0, -2.3695, 2.3140, -1.0547, 0.1874}, B[5] = {0.0048, 0.0193, 0.0289, 0.0193, 0.0048};
     int Nr = 5, Ny = 5;
     double AD_scale = 0.1688;
+    double kp = 5.0;
 
     // set up the external interrupt
 
@@ -530,7 +531,7 @@ int main(void) {
         //  
         /*********************************************/
 
-        u = error;
+        u = kp * error;
 
         /*********************************************/
         // implement CONYTROl EFFORT CONVERSION
@@ -545,9 +546,9 @@ int main(void) {
         // u/AD_scale corresponds to R/AD_scale
         // so u has units of MAX_DUTY/1023 * [0-1023]
 
-        //u = u * convert_to_duty / AD_scale; // convert back to a pwm signal
-        if (error > 0.0) u = 0.2 * MAX_DUTY;
-        else u = 0.0;
+        u = u * convert_to_duty / AD_scale; // convert back to a pwm signal
+//        if (error > 0.0) u = 0.2 * MAX_DUTY;
+//        else u = 0.0;
         u = min(u, MAX_DUTY); // don't let u get too large
         u = max(u, 0.0); // don't let u get negative, 
 
