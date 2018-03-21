@@ -348,7 +348,8 @@ void update_array(double arr[], int N) {
 
 void filter(double A[], double B[], double fin[], double fout[], int N) {
     int i;
-    for (i = 0; i < N; i++) {
+    fout[0] = B[0] * fin[0];
+    for (i = 1; i < N; i++) {
         fout[0] += B[i] * fin[i] - A[i] * fout[i];
     }
 }
@@ -365,15 +366,15 @@ int main(void) {
     int count, int_time, int_Rin, int_Rout, int_Y, int_R, int_u;
     double arg, speed, speed_scale;
     double error, u;
-    double Y, Yin[5] = {0.0, 0.0, 0.0, 0.0};
-    double Yout[5] = {0.0, 0.0, 0.0, 0.0};
-    double R, Rin[5] = {0.0, 0.0, 0.0, 0.0};
-    double Rout[5] = {0.0, 0.0, 0.0, 0.0};
+    double Y, Yin[5] = {0.0, 0.0, 0.0, 0.0, 0.0};
+    double Yout[5] = {0.0, 0.0, 0.0, 0.0, 0.0};
+    double R, Rin[5] = {0.0, 0.0, 0.0, 0.0, 0.0};
+    double Rout[5] = {0.0, 0.0, 0.0, 0.0, 0.0};
     double A[5] = {1.0, -2.3695, 2.3140, -1.0547, 0.1874}, B[5] = {0.0048, 0.0193, 0.0289, 0.0193, 0.0048};
     int Nr = 5, Ny = 5;
     double AD_scale = 0.1688;
-    double kp = 8.0;
-    double reference_scaling = 1.087;
+    double kp = 2.0;
+    double reference_scaling = 1.60;
 
     // set up the external interrupt
 
